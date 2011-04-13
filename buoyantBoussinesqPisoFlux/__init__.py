@@ -47,13 +47,13 @@ if FOAM_VERSION( "<", "010600" ):
    
 #---------------------------------------------------------------------------
 if FOAM_REF_VERSION( "==", "010600" ):
-    from Foam.applications.solvers.heatTransfer.r1_6.buoyantBoussinesqPisoFoam import *
+    from buoyantBoussinesqPisoFlux.r1_6 import *
     pass
 
 
 #--------------------------------------------------------------------------------------
 if FOAM_BRANCH_VERSION( "dev", ">=", "010600" ):
-    from Foam.applications.solvers.heatTransfer.r1_6_dev.buoyantBoussinesqPisoFoam import *
+    from buoyantBoussinesqPisoFlux.r1_6_dev import *
     pass
 
 
