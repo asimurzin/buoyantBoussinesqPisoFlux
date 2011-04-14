@@ -24,28 +24,7 @@
 
 
 #---------------------------------------------------------------------------   
-# Check is the pythonFlu installed
-try:
-   import Foam
-   pass
-except ImportError:
-   print 
-   print "You must install pythonFlu first( http://sourceforge.net/projects/pythonflu/files/)" 
-   print
-   os._exit( os.EX_UNAVAILABLE )
-   pass
-
-
-#---------------------------------------------------------------------------   
 from Foam import FOAM_VERSION, FOAM_REF_VERSION, FOAM_BRANCH_VERSION
-import sys, os
-if FOAM_VERSION( "<", "010600" ):
-   from Foam.OpenFOAM import ext_Info
-   ext_Info()<< "\nTo use this solver, It is necessary to SWIG OpenFoam1.6 \n "
-   pass
-   
-   
-#---------------------------------------------------------------------------
 if FOAM_REF_VERSION( "==", "010600" ):
     from buoyantBoussinesqPisoFlux.r1_6 import *
     pass
@@ -58,16 +37,15 @@ if FOAM_BRANCH_VERSION( "dev", ">=", "010600" ):
 
 
 #--------------------------------------------------------------------------------------
-if FOAM_REF_VERSION( ">", "010600" ):
-   from Foam.OpenFOAM import ext_Info
-   ext_Info()<< "\nTo use this solver, It is necessary to SWIG OpenFoam1.6 \n "
-   pass
-
-
-#--------------------------------------------------------------------------------------
 def entry_point():
-    import sys; argv = sys.argv
-    return main_standalone( len( argv ), argv )
+    try:
+       import sys; argv = sys.argv
+       return main_standalone( len( argv ), argv )
+    except NameError:
+       print
+       print "There is no implementation of the current OpenFOAM version"
+       print
+       pass
 
 
 #--------------------------------------------------------------------------------------
